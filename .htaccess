@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !eosfrontier.space
+RewriteCond %{REQUEST_URI} ^/eos_bank/(.+).php$
+RewriteRule . - [F]

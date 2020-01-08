@@ -1,0 +1,194 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+body{
+    background:#262e3e;
+    font-family: 'Khand', sans-serif;
+    font-size:24px;
+    color: #e6dddd;
+}
+
+.container{
+    width:1024px;
+    margin:0 auto;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+a{
+    color:#4070ad;
+    text-decoration: none;
+    border-bottom:solid 1px #fff;
+    transition: all 0.2s linear;
+}
+
+    a:hover, a.current{
+        border-bottom:solid 1px #4070ad;
+    }
+
+/*-- SHARED --*/
+
+.big{
+    font-size:30px;
+}
+
+p{
+    margin-bottom:15px;
+}
+
+.red{
+    color:#fff;
+}
+
+.clear{
+    clear:both;
+}
+
+/*-- END SHARED --*/
+
+/*-- HEADER --*/
+
+header{
+    margin:10px 0 20px;
+}
+
+    #logo{
+        height:102px;
+        padding-left:130px;
+        background:url(../images/logo.png) no-repeat;
+        background-size:100px 102px;
+        font-size:36px;
+        line-height: 102px;
+        float:left;
+    }
+
+    .header-right{
+        float:right;
+        text-align: right;
+        line-height: 22px;
+    }
+
+        .header-logout{
+            display:inline-block;
+            margin-top:10px;
+        }
+
+.menu{
+    margin-bottom:30px;
+}
+
+    .menu a{
+        display:inline-block;
+        margin-right:10px;
+    }
+
+/*-- END HEADER --*/
+
+/*-- FRONT PAGE --*/
+
+.login{
+    float:left;
+    width:550px;
+}
+
+    #login-form{}
+
+        #login-input{
+            border:solid 3px #000;
+            width:300px;
+            height:30px;
+            text-align: center;
+            font-size:22px;
+            font-family: 'Khand', sans-serif;
+        }
+
+.message-right{
+    width:400px;
+    float:right;
+}
+
+/*-- END FRONT PAGE --*/
+
+/*-- OVERVIEW --*/
+
+.current-money{
+    margin-bottom:15px;
+    font-size:28px;
+}
+
+/*-- END OVERVIEW --*/
+
+/*-- TRANSFER --*/
+
+.recepient-select{
+    width:530px;
+    height: 33px;
+}
+
+    .select2-container{
+        font-size:20px;
+    }
+
+.amount-input{
+    font-size:20px;
+    width:50%;
+    border-radius: 4px;
+    border:solid 1px #aaa;
+    padding:0px 8px;
+    font-family: 'Khand', sans-serif;
+}
+
+.submit-input{
+    font-size:20px;
+    border-radius: 4px;
+    border:solid 1px #aaa;
+    padding:0px 24px;
+    font-family: 'Khand', sans-serif;
+    background:#fff;
+    margin-top:15px;
+    cursor:pointer;
+    transition: all 0.2s linear;
+}
+
+    .submit-input:hover{
+        color:#fff;
+        background:#000;
+    }
+
+.transfer-success{
+    display:none;
+}
+
+/*-- END TRANSFER --*/
+
+/* -- DROPDOWN MENUS -- */
+.select2-container--default .select2-results>.select2-results__options {
+    background-color: #222;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff !important;
+    background-color: #222;
+    line-height: 28px;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    /* border: #222; */
+    background-color: black;
+    color: white;
+}
+.amount-input {
+    color: white;
+    background-color: #222;
+}
+.select2-container--open .select2-dropdown--below {
+   background-color: #222;
+}
+#login-input {
+    background-color: #222;
+    color: #fff;
+}
+/* -- END DROPDOWN MENUS */
+
