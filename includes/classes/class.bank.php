@@ -99,7 +99,7 @@ class bank{
         $stmt = db::$conn->prepare($sql);
         $result = $stmt->execute([$to, $from, $amount, $description]);
 
-        return "success";
+        return str_replace(PHP_EOL, '', "success");
     }
 
 }

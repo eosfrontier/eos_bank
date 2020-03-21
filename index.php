@@ -1,4 +1,5 @@
 <?php
+
     include('includes/include.php');
     $cBank = new bank();
     $aUser = "";
@@ -22,7 +23,7 @@
             <div class="container">
                 <div class="login">
                     <p class="big">
-                        Please scan your ICC-identy badge
+                        Please scan your ICC-identity badge
                     </p>
                     <form id="login-form" method="post" autocomplete="off">
                         <input name="scan" id="login-input" autofocus />
@@ -37,12 +38,12 @@
 
                 </div>
                 <div class="message-right">
-                    <p class="big">Welcome valued customer.</p>
+                    <p class="big">Welcome, valued customer.</p>
                     <p>
-                        We are proud that you choose us for all your banking business. We strive hard to keep your Sonuren secure. That's why we've included the new security measure that you can only login ICC-identy badge.
+                        We are proud that you choose us for all your banking business. We strive hard to keep your Sonuren secure. That's why we've included the new security measure that you can only login with your ICC-identity badge.
                     </p>
                     <p>
-                        This banking terminal is secured by the latest security measures and keeps getting improved. Do you think you could help is in our efforts to keep your Sonuren more secure and our banking experience more pleasurable? Feel free to contact us.
+                        This banking terminal is secured by the latest security measures and keeps getting improved. Do you think you could help us in our efforts to keep your Sonuren more secure and our banking experience more pleasurable? Feel free to contact us.
                     </p>
                 </div>
             </div>

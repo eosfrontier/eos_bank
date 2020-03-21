@@ -6,7 +6,6 @@
         case "transfer":
             $result = $cBank->transfer($_POST);
             echo $result;
-            //var_dump($result);
             break;
     }
 
