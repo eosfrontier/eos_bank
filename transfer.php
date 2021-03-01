@@ -3,7 +3,7 @@
     loggedIn();
     $cBank = new bank();
     $sonuren = $cBank->getSonurenById($_SESSION["id"]);
-    $aRecepients = $cBank->getRecepients();
+    $arecipients = $cBank->getrecipients();
 ?>
     <?php
         include('includes/inc.header.php');
@@ -28,7 +28,7 @@
                         <option value="" disabled selected>Select a company or person</option>
                         <optgroup label="Companies">
                             <?php
-                                foreach($aRecepients as $aRecepient){
+                                foreach($arecipients as $aRecepient){
                                     if($aRecepient->company != 0){
                                         ?>
                                         <option value="<?php echo $aRecepient->characterID; ?>">
@@ -41,7 +41,7 @@
                         </optgroup>
                         <optgroup label="Persons">
                             <?php
-                                foreach($aRecepients as $aRecepient){
+                                foreach($arecipients as $aRecepient){
 									
                                     if($aRecepient->company == 0){
                                         if(!empty($aRecepient->character_name)){

@@ -127,9 +127,9 @@ class bank{
         return $user->character_name;
     }
 
-    public function getRecepients(){
+    public function getrecipients(){
         $headers = array(
-			"recepients: 1",
+			"recipients: 1",
 			"token: $this->token",
 		);
 
