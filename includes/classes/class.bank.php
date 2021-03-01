@@ -1,105 +1,173 @@
 <?php
 
 class bank{
+	
+	public $token = "am9zaHNwbGF5Z3JvdW5k";
+	public $apilocation = "//api.eosfrontier.space/orthanc/";
+
+	/**
+	 * api_bank_request
+	 *
+	 * @param  mixed $headers
+	 * @return void
+	 */
+	public function api_bank_request($headers) {
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->apilocation . "v2/bank/",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => $headers,
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		return $response;
+	}
+	
+	/**
+	 * api_character_request
+	 *
+	 * @param  mixed $headers
+	 * @return void
+	 */
+	public function api_character_request($headers) {
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->apilocation . "v2/character/",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => $headers,
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		
+		return $response;
+	}
+
     public function login($post){
 	    if(strlen($post) < 6){
 		    
 		    return "false";
 	    }
 	    
-        $stmt = db::$conn->prepare("SELECT * FROM ecc_characters WHERE ICC_number = ?");
-		$res = $stmt->execute(array($post));
-		$res = $stmt->fetch();
+		$headers = array(
+			"token: $this->token",
+			"card_id: $post"
+		);
 
-        if($res == null){
-            $stmt = db::$conn->prepare("SELECT * FROM ecc_characters WHERE card_id = ?");
-            $res = $stmt->execute(array($post));
-    		$res = $stmt->fetch();
-        }
-		
-		
-        if($res == null){
-            $sHex = dechex($post);
-            $aDec = str_split($sHex, 2);
-            if(!isset($aDec[1])){
-	            return "false";
-            }
-            $sDec = "%".$aDec[3].$aDec[2].$aDec[1].$aDec[0]."%";
-			if($sDec == "%0%"){
-				return "false";
-			}
-			
-            $stmt = db::$conn->prepare("SELECT * FROM ecc_characters WHERE card_id LIKE ?");
-            $res = $stmt->execute(array($sDec));
-    		$res = $stmt->fetch();
-        }
+		$res = $this->api_character_request($headers);
         
-
-        if($res == null){
+        if($res === null){
             return "false";
         }
 
-        return $res;
-    }
-
-    public function getSonurenById($id){
-        $stmt = db::$conn->prepare("SELECT * FROM ecc_characters WHERE characterID = ?");
-		$res = $stmt->execute(array($id));
-		$res = $stmt->fetch();
-
-        $sonuren = intval($res["sonuren_offset"]);
-
-        $stmt = db::$conn->prepare("SELECT * FROM bank_logging WHERE character_id = ?");
-		$res = $stmt->execute(array($id));
-		$aEntries = $stmt->fetchAll();
-
-        foreach($aEntries as $aEntry){
-            $sonuren = $sonuren + intval($aEntry["amount"]);
-
+		if($res === "None found."){
+            return "false";
         }
-        return $sonuren;
+
+        return json_decode($res);
+    }
+    
+    /**
+     * getSonurenById
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function getSonurenById($id){
+        $headers = array(
+			"amount: 1",
+			"token: $this->token",
+			"id: $id"
+		);
+
+		$amount = $this->api_bank_request($headers);
+
+		if ($amount === '"None found."') {
+			$amount = 0;
+		}
+
+		return $amount;
     }
 
     public function getMutationsById($id){
-        $stmt = db::$conn->prepare("SELECT * FROM bank_logging WHERE character_id = ?");
-		$res = $stmt->execute(array($id));
-		$aEntries = $stmt->fetchAll();
+        $headers = array(
+			"token: $this->token",
+			"id: $id"
+		);
 
-        return $aEntries;
+		return json_decode($this->api_bank_request($headers));
     }
 
     public function getNameById($id){
-        $stmt = db::$conn->prepare("SELECT character_name FROM ecc_characters WHERE characterID = ?");
-		$res = $stmt->execute(array($id));
-		$name = $stmt->fetch();
+        $headers = array(
+			"token: $this->token",
+			"char_id: $id"
+		);
 
-        return $name;
+		$user = json_decode( $this->api_character_request( $headers ) );
+
+        return $user->character_name;
     }
 
     public function getRecepients(){
-        $stmt = db::$conn->prepare("SELECT character_name, bank, characterID, company FROM ecc_characters WHERE bank = 1 ORDER BY character_name");
-		$res = $stmt->execute();
-		$res = $stmt->fetchAll();
+        $headers = array(
+			"recepients: 1",
+			"token: $this->token",
+		);
 
-        return $res;
+		return json_decode($this->api_bank_request($headers));
     }
 
     public function transfer($post){
+
+
         $amount         = $post["amount"];
-        $negamount      = "-".$post["amount"];
         $from           = $post["from"];
-        $to             = $post["recepient"];
+        $recepient      = $post["recepient"];
         $description    = $post["description"];
 
-        $sql = "INSERT INTO bank_logging (character_id, id_to, amount, description) values (?, ?, ?, ?)";
-        $stmt = db::$conn->prepare($sql);
-        $result = $stmt->execute([$from, $to, $negamount, $description]);
+		$curl = curl_init();
 
-        $sql = "INSERT INTO bank_logging (character_id, id_to, amount, description) values (?, ?, ?, ?)";
-        $stmt = db::$conn->prepare($sql);
-        $result = $stmt->execute([$to, $from, $amount, $description]);
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->apilocation . "v2/bank/",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "POST",
+		CURLOPT_HTTPHEADER => array(
+			"amount: $amount",
+			"from: $from",
+			"recepient: $recepient",
+			"description: $description",
+			"token: $this->token",
+		),
+		));
 
-        return str_replace(PHP_EOL, '', "success");
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		return $response;
     }
 
 }

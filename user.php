@@ -19,7 +19,7 @@
                 <div class="current-money">
                     <strong>Current balance: <?php echo $sonuren; ?></strong>
                 </div>
-
+				<?php if(!empty($aEntries)){ ?>
                 <table id="bankingoverview" width="100%">
                     <thead>
                         <td>
@@ -37,19 +37,35 @@
                     ?>
                     <tr>
                         <td>
-                            <?php echo $cBank->getNameById($aEntry["id_to"])[0]; ?>
+                            <?php 
+								if ( $aEntry->id_to === $_SESSION["id"] ) {
+									$name = $cBank->getNameById($aEntry->character_id); 
+								}
+								else {
+									$name = $cBank->getNameById($aEntry->id_to); 
+								}
+								
+								echo $name;
+							?>
                         </td>
                         <td>
-                            <?php echo $aEntry["description"] ?>
+                            <?php echo $aEntry->description ?>
                         </td>
                         <td>
-                            <?php echo $aEntry["amount"] ?>
+                            <?php 
+								if ( $aEntry->id_to === $_SESSION["id"] ) {
+									echo "-";
+								}
+								echo $aEntry->amount
+							?>
                         </td>
                     </tr>
                     <?php
-                        }
+                    }
+					
                     ?>
                 </table>
+				<?php } ?>
             </div>
         </div>
     </div>

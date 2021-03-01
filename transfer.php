@@ -29,10 +29,10 @@
                         <optgroup label="Companies">
                             <?php
                                 foreach($aRecepients as $aRecepient){
-                                    if($aRecepient["company"] != 0){
+                                    if($aRecepient->company != 0){
                                         ?>
-                                        <option value="<?php echo $aRecepient["characterID"]; ?>">
-                                            <?php echo $aRecepient["character_name"]; ?>
+                                        <option value="<?php echo $aRecepient->characterID; ?>">
+                                            <?php echo $aRecepient->character_name; ?>
                                         </option>
                                         <?php
                                     }
@@ -42,11 +42,12 @@
                         <optgroup label="Persons">
                             <?php
                                 foreach($aRecepients as $aRecepient){
-                                    if($aRecepient["company"] == 0){
-                                        if(!empty($aRecepient["character_name"])){
+									
+                                    if($aRecepient->company == 0){
+                                        if(!empty($aRecepient->character_name)){
                                         ?>
-                                        <option value="<?php echo $aRecepient["characterID"]; ?>">
-                                            <?php echo $aRecepient["character_name"]; ?>
+                                        <option value="<?php echo $aRecepient->characterID; ?>">
+                                            <?php echo $aRecepient->character_name; ?>
                                         </option>
                                         <?php
                                         }
