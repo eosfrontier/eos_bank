@@ -24,7 +24,7 @@
                     Thank you for chosing System of Central Banks.
                 </div>
                 <form class="transfer-form">
-                    <select required="required" name="recepient" class="recepient-select">
+                    <select required="required" name="recipient" class="recepient-select">
                         <option value="" disabled selected>Select a company or person</option>
                         <optgroup label="Companies">
                             <?php

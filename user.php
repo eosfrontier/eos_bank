@@ -53,7 +53,7 @@
                         </td>
                         <td>
                             <?php 
-								if ( $aEntry->id_to === $_SESSION["id"] ) {
+								if ( $aEntry->id_to !== $_SESSION["id"] ) {
 									echo "-";
 								}
 								echo $aEntry->amount

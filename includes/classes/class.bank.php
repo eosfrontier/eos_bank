@@ -11,11 +11,11 @@ class bank{
 	 * @param  mixed $headers
 	 * @return void
 	 */
-	public function api_bank_request($headers) {
+	public function api_bank_request($headers, $location = '') {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => $this->apilocation . "v2/bank/",
+		CURLOPT_URL => $this->apilocation . "v2/bank/" . $location,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => "",
 		CURLOPT_MAXREDIRS => 10,
@@ -43,7 +43,7 @@ class bank{
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => $this->apilocation . "v2/character/",
+		CURLOPT_URL => $this->apilocation . "v2/chars_player/",
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => "",
 		CURLOPT_MAXREDIRS => 10,
@@ -113,7 +113,9 @@ class bank{
 			"id: $id"
 		);
 
-		return json_decode($this->api_bank_request($headers));
+		$location = 'transactions/';
+
+		return json_decode($this->api_bank_request($headers, $location));
     }
 
     public function getNameById($id){
@@ -133,7 +135,9 @@ class bank{
 			"token: $this->token",
 		);
 
-		return json_decode($this->api_bank_request($headers));
+		$location = 'recipients';
+
+		return json_decode($this->api_bank_request($headers, $location));
     }
 
     public function transfer($post){
@@ -141,7 +145,7 @@ class bank{
 
         $amount         = $post["amount"];
         $from           = $post["from"];
-        $recepient      = $post["recepient"];
+        $recipient      = $post["recipient"];
         $description    = $post["description"];
 
 		$curl = curl_init();
@@ -158,7 +162,7 @@ class bank{
 		CURLOPT_HTTPHEADER => array(
 			"amount: $amount",
 			"from: $from",
-			"recepient: $recepient",
+			"recipient: $recipient",
 			"description: $description",
 			"token: $this->token",
 		),

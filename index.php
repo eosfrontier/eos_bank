@@ -3,9 +3,11 @@
     include('includes/include.php');
     $cBank = new bank();
     $aUser = "";
+
     if(isset($_POST["scan"])){
         $scan = $_POST["scan"];
         $aUser = $cBank->login($scan);
+		var_dump($aUser);
         if($aUser != "false" && !empty($aUser)){
             $_SESSION["id"]     = $aUser->characterID;
             $_SESSION["name"]   = $aUser->character_name;
