@@ -5,6 +5,14 @@ error_reporting(E_ALL);
 
 define("HOME","location: //www.eosfrontier.space/eos_bank");
 
+if( $_SERVER['HTTP_HOST'] === "site.test" ){
+	$location = 'localhost/orthanc/';
+}
+else{
+	$location = "//api.eosfrontier.space/orthanc/";
+}
+
+global $location;
 
     //error_reporting(E_ALL);
     ini_set('display_errors', 1);

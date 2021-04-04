@@ -1,10 +1,10 @@
 <?php
-
 class bank{
 	
 	public $token = "am9zaHNwbGF5Z3JvdW5k";
-	public $apilocation = "//api.eosfrontier.space/orthanc/";
-
+	public $apilocation = '//api.eosfrontier.space/orthanc/';
+	//public $apilocation = 'localhost/orthanc/';
+		
 	/**
 	 * api_bank_request
 	 *
@@ -104,7 +104,7 @@ class bank{
 			$amount = 0;
 		}
 
-		return $amount;
+		return json_decode($amount);
     }
 
     public function getMutationsById($id){
