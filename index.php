@@ -7,7 +7,6 @@
     if(isset($_POST["scan"])){
         $scan = $_POST["scan"];
         $aUser = $cBank->login($scan);
-
         if($aUser != "false" && !empty($aUser)){
             $_SESSION["id"]     = $aUser->characterID;
             $_SESSION["name"]   = $aUser->character_name;
