@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="current-money">
-                    <strong>Current balance: <?php echo $sonuren; ?></strong>
+                    <strong>Current balance: <img src="./images/sonuren.svg" /><?php echo $sonuren; ?></strong>
                 </div>
 				<?php if(!empty($aEntries)){ ?>
                 <table id="bankingoverview" width="100%">
@@ -38,11 +38,15 @@
                     <tr>
                         <td>
                             <?php 
-								if ( $aEntry->id_to === $_SESSION["id"] ) {
-									$name = $cBank->getNameById($aEntry->character_id); 
-								}
-								else {
-									$name = $cBank->getNameById($aEntry->id_to); 
+								if( $aEntry->id_to === '99999' ){
+									$name = 'System of Central Banks';
+								}else{
+									if ( $aEntry->id_to === $_SESSION["id"] ) {
+										$name = $cBank->getNameById($aEntry->character_id); 
+									}
+									else {
+										$name = $cBank->getNameById($aEntry->id_to); 
+									}
 								}
 								
 								echo $name;
@@ -52,6 +56,7 @@
                             <?php echo $aEntry->description ?>
                         </td>
                         <td>
+							<img src="./images/sonuren.svg" />
                             <?php 
 								if ( $aEntry->id_to !== $_SESSION["id"] ) {
 									echo "-";
@@ -72,8 +77,5 @@
     <?php
         include('includes/inc.footer.php');
     ?>
-    <script>
-
-    </script>
 </body>
 </html>
