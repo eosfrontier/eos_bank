@@ -3,7 +3,10 @@
     include('includes/include.php');
     $cBank = new bank();
     $aUser = "";
+    require_once './includes/SSO.php';
 
+    echo $logged_in_player['id'];
+    echo $logged_in_player['name'];
     if(isset($_POST["scan"])){
         $scan = $_POST["scan"];
         $aUser = $cBank->login($scan);
