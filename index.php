@@ -5,24 +5,24 @@
     $aUser = "";
     require_once 'includes/SSO.php';
 	$scan = $logged_in_char->ICC_number;
-   if(isset($scan)){
-	$aUser = $cBank->login($scan);
+    if(isset($scan)){
+        $aUser = $cBank->login($scan);
         if($aUser != "false" && !empty($aUser)){
-             $_SESSION["id"]     = $aUser->characterID;
-             $_SESSION["name"]   = $aUser->character_name;
-	     $url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
-              header($url);
+            $_SESSION["id"]     = $aUser->characterID;
+            $_SESSION["name"]   = $aUser->character_name;
+	        $url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
+            header($url);
 	      }
-	} elseif(isset($_POST["scan"])){
-        	$scan = $_POST["scan"];
+        } elseif(isset($_POST["scan"])){
+            $scan = $_POST["scan"];
         	$aUser = $cBank->login($scan);
-        	if($aUser != "false" && !empty($aUser)){
-            		$_SESSION["id"]     = $aUser->characterID;
-            		$_SESSION["name"]   = $aUser->character_name;
-            		$url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
-            		header($url);
-        		}
-	    }
+            if($aUser != "false" && !empty($aUser)){
+                $_SESSION["id"]     = $aUser->characterID;
+            	$_SESSION["name"]   = $aUser->character_name;
+            	$url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
+            	header($url);
+            }
+        }
 ?>
     <?php
         include('includes/inc.header.php');
