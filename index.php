@@ -11,7 +11,8 @@
      $url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
      header($url);
      }
-	if(!(isset($logged_in_char->characterID)) && isset($_POST["scan"])){
+     else{
+	if(!(isset($_POST["scan"])){
         $scan = $_POST["scan"];
         $aUser = $cBank->login($scan);
         if($aUser != "false" && !empty($aUser)){
@@ -57,6 +58,7 @@
             </div>
         </div>
     </div>
+    }
     <?php
         include('includes/inc.footer.php');
     ?>
