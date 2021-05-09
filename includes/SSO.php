@@ -1,5 +1,5 @@
 <?php
-require_once './joomla.php';
+include 'joomla.php';
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -12,11 +12,13 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'GET',
   CURLOPT_HTTPHEADER => array(
-    'accountID: $jid',
+    'accountID:' . $jid,
     'token: am9zaHNwbGF5Z3JvdW5k'
   ),
 ));
 
-$logged_in_player = curl_exec($curl);
+$response = curl_exec($curl);
 
 curl_close($curl);
+
+$logged_in_char = json_decode($response);

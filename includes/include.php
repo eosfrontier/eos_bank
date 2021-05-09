@@ -22,9 +22,9 @@ global $location;
     //include("classes/class.$classname.php");
 //}
 
-spl_autoload_register(function($class) {
-    include 'classes/class.' . $class . '.php';
-});
+//spl_autoload_register(function($class) {
+      include 'classes/class.bank.php';
+//});
 
 function loggedIn(){
     if(empty($_SESSION)){

@@ -3,11 +3,15 @@
     include('includes/include.php');
     $cBank = new bank();
     $aUser = "";
-    require_once './includes/SSO.php';
+    require_once 'includes/SSO.php';
 
-    echo $logged_in_player['id'];
-    echo $logged_in_player['name'];
-    if(isset($_POST["scan"])){
+   if(isset($logged_in_char->characterID)){
+     $_SESSION["id"]     = $logged_in_char->characterID;
+     $_SESSION["name"] = $logged_in_char->character_name;
+     $url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
+     header($url);
+     }
+	if(!(isset($logged_in_char->characterID)) && isset($_POST["scan"])){
         $scan = $_POST["scan"];
         $aUser = $cBank->login($scan);
         if($aUser != "false" && !empty($aUser)){
