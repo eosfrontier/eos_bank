@@ -2,7 +2,7 @@
 class bank{
 	
 	public $token = "am9zaHNwbGF5Z3JvdW5k";
-	public $apilocation = '//api.eosfrontier.space/orthanc/';
+	public $apilocation = 'api.eosfrontier.space/orthanc/';
 	//public $apilocation = 'localhost/orthanc/';
 		
 	/**
@@ -99,7 +99,6 @@ class bank{
 		);
 
 		$amount = $this->api_bank_request($headers);
-
 		if ($amount === '"None found."') {
 			$amount = 0;
 		}

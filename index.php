@@ -3,19 +3,28 @@
     include('includes/include.php');
     $cBank = new bank();
     $aUser = "";
+    
+	//var_dump($logged_in_char->card_id);
+	if(isset($logged_in_char->card_id)){
+		$_SESSION["id"]     = $logged_in_char->characterID;
+		$_SESSION["name"]   = $logged_in_char->character_name;
 
-    if(isset($_POST["scan"])){
-        $scan = $_POST["scan"];
-        $aUser = $cBank->login($scan);
-        if($aUser != "false" && !empty($aUser)){
-            $_SESSION["id"]     = $aUser->characterID;
-            $_SESSION["name"]   = $aUser->character_name;
-            $url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
-            header($url);
-        }
+		var_dump($_SESSION);
+		$url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
+		header($url);
+	}
 
-
-    }
+	
+	if(isset($_POST["scan"])){
+		$scan = $_POST["scan"];
+		$aUser = $cBank->login($scan);
+		if($aUser != "false" && !empty($aUser)){
+			$_SESSION["id"]     = $aUser->characterID;
+			$_SESSION["name"]   = $aUser->character_name;
+			$url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
+			header($url);
+		}
+	}
 ?>
     <?php
         include('includes/inc.header.php');
@@ -50,6 +59,7 @@
             </div>
         </div>
     </div>
+    
     <?php
         include('includes/inc.footer.php');
     ?>

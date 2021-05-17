@@ -4,7 +4,6 @@
     $cBank = new bank();
     $sonuren = $cBank->getSonurenById($_SESSION["id"]);
     $aEntries = $cBank->getMutationsById($_SESSION["id"]);
-
 ?>
     <?php
         include('includes/inc.header.php');
