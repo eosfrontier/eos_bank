@@ -1,0 +1,16 @@
+.grid {
+	display: grid;
+	grid-column-gap: 24px;
+	grid-row-gap: 24px;
+	list-style: none; // make sure that if the class is applied to a <ul>, it does not have a list-style.
+
+	&__col-2 {
+		grid-template-columns: 1fr 1fr;
+
+		@media screen and (max-width: 600px) {
+			grid-template-columns: 1fr;
+		}
+
+	}
+
+}

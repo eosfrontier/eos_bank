@@ -21,15 +21,15 @@
 				<?php if(!empty($aEntries)){ ?>
                 <table id="bankingoverview" width="100%">
                     <thead>
-                        <td>
+                        <th>
                             Name
-                        </td>
-                        <td>
+                        </th>
+                        <th>
                             Description
-                        </td>
-                        <td>
+                        </th>
+                        <th>
                             Amount
-                        </td>
+                        </th>
                     </thead>
                     <?php
                         foreach($aEntries as $aEntry){

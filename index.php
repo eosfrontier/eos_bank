@@ -30,7 +30,7 @@
         include('includes/inc.header.php');
     ?>
         <div id="main">
-            <div class="container">
+            <div class="container grid grid__col-2">
                 <div class="login">
                     <p class="big">
                         Please scan your ICC-identity badge
