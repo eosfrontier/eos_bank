@@ -3,13 +3,14 @@
     include('includes/include.php');
     $cBank = new bank();
     $aUser = "";
+
+var_dump($logged_in_char);
     
 	//var_dump($logged_in_char->card_id);
 	if(isset($logged_in_char->card_id)){
 		$_SESSION["id"]     = $logged_in_char->characterID;
 		$_SESSION["name"]   = $logged_in_char->character_name;
 
-		var_dump($_SESSION);
 		$url =  "location: https://www.eosfrontier.space/eos_bank/user.php";
 		header($url);
 	}
