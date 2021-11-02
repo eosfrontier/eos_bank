@@ -4,9 +4,9 @@
     $cBank = new bank();
     $aUser = "";
 
-var_dump($logged_in_char);
+//var_dump($logged_in_char);
     
-	//var_dump($logged_in_char->card_id);
+	//($logged_in_char->card_id);
 	if(isset($logged_in_char->card_id)){
 		$_SESSION["id"]     = $logged_in_char->characterID;
 		$_SESSION["name"]   = $logged_in_char->character_name;
