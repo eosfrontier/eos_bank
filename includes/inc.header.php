@@ -24,7 +24,14 @@
             <div class="header-right">
                 Welcome<br />
                 <strong><?php echo $_SESSION["name"]; ?></strong><br />
-                <a class="header-logout" href="./logout.php">Log out</a>
+                <?php
+                if(!isset($logged_in_char->card_id)){
+                    echo '<a class="header-logout" href="./logout.php">Log out</a>';
+                }
+                else {
+                    echo '<a href="https://ic.eosfrontier.space">Return to Dashboard</a>';
+                }
+                    ?>
             </div>
             <?php } ?>
             <div class="clear"></div>
